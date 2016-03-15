@@ -1,3 +1,5 @@
+'use strict';
+
 var chai = require('chai');
 var chaiHTTP = require('chai-http');
 chai.use(chaiHTTP);
@@ -19,15 +21,15 @@ describe('Testing POST to /series', () => {
         req.body.should.have.property('network');
         req.body.name.should.equal('The Walking Dead');
         req.body.network.should.equal('AMC');
-      })
-  })
+      });
+  });
   it('should respond to incorrect JSON with error message', () => {
     request(`localhost:${config.PORT}`)
       .post('/series')
-      .send("asdfqwerkjladfs;kl")
+      .send('asdfqwerkjladfs;kl')
       .end( (err, res) => {
         res.status.should.equal(400);
         res.body.should.equal('invalid json');
-      })
-  })
-})
+      });
+  });
+});
