@@ -1,0 +1,21 @@
+{
+  "name": "samantha",
+  "version": "0.1.0",
+  "description": "middleware for making a json body parser",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "samantha",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "superagent": "^1.8.1",
+    "superagent-cli": "^2.1.0"
+  }
+}
