@@ -18,16 +18,16 @@ let db = {
 }
 
 
-
 app.use('/screams',(req, res, next) => {
  req.body = [];
  if(req.method === 'GET') return next();
-
  req.on('data',(chunk) => {
    req.body.push(chunk)
- }).on('end', function(){
+   console.log('before' , chunk)
+ }).on('end', function(err){
+   if(err) return next()
    req.body = JSON.parse(Buffer.concat(req.body).toString());
-   console.log('req.body' ,req.body)
+   console.log(typeof req.body)
    next();
    })
  })
@@ -40,7 +40,7 @@ shoutRouter.route('/screams')
   })
 })
   .post((req, res) =>{
-    let scream = req.body.name;
+    let scream = req.body;
     db.screams.push(req.body)
     console.log(req.body)
     res.end();
@@ -48,5 +48,6 @@ shoutRouter.route('/screams')
 
 
 app.use('/', shoutRouter)
+
 
 app.listen(3000);
