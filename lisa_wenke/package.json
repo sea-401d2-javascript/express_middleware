@@ -1,7 +1,6 @@
 {
   "name": "lisa_wenke",
   "version": "1.0.0",
-  "description": "",
   "main": "router.js",
   "directories": {
     "test": "test"
@@ -9,8 +8,10 @@
   "dependencies": {},
   "devDependencies": {
     "body-parser": "^1.15.0",
+    "chai": "^3.5.0",
     "chai-http": "^2.0.1",
     "express": "^4.13.4",
+    "mocha": "^2.4.5",
     "mongoose": "^4.4.7"
   },
   "scripts": {
@@ -18,5 +19,6 @@
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }
