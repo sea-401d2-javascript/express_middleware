@@ -2,7 +2,7 @@
 
 var chai = require('chai');
 var chaiHttp = require('chai-http');
-require(__dirname + '/../routes/companies-routes.js');
+require(__dirname + '/../server.js');
 
 chai.use(chaiHttp);
 let request = chai.request;
@@ -29,10 +29,9 @@ describe('test /companies routes', () => {
       .post('/api/companies')
       .send(invalidJSON)
       .end((err, res) => {
-        // console.log(res.body);
-        // expect(err).to.not.equal(null);
-        // expect(res).to.have.status(422);
-        // expect(res.body).to.equal('Invalid JSON');
+        expect(err).to.not.equal(null);
+        expect(res).to.have.status(422);
+        expect(res.body.message).to.equal('Invalid JSON');
         done();
       });
   });
