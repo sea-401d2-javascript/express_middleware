@@ -1,8 +1,8 @@
 'use strict';
-//call packages
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+
 
 //create inline database
 var db = {
@@ -30,14 +30,9 @@ var db = {
 
 };
 
-//configure bodyParser
 
 app.use(bodyParser.json());
-//set port
 var port = process.env.PORT || 3000;
-
-//routes for API
-  //get an instance for the express router
 var router = express.Router();
 
 app.use('/api', router);
@@ -49,10 +44,9 @@ router.use(function(req,res, next){
 
 router.route('/unicorns')
   .post((req, res)=>{
+    var unicorn = req.body;
+    console.log('GET got hit');
     db.unicorns.push(req.body);
-    let unicorn = req.body;
-      // if(err) {
-      //   res.json('404 Not Found');
     res.json({
       message: 'a new unicorn has been created',
       status: true,
@@ -60,11 +54,12 @@ router.route('/unicorns')
     });
   })
   .get((req, res)=> {
-    console.log('GET processed for /unicorn');
+    console.log('GET got hit');
+    let unicorn = db.unicorns;
     res.json({
       message: 'unicorn request processed',
       status: true,
-      data: db.unicorns
+      data: unicorn
     });
   });
 
@@ -93,6 +88,6 @@ router.route('/unicorns')
 
   // });
 
-//start the server
+
 app.listen(port);
 console.log('magic is happening on ' + port);

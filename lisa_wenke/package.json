@@ -1,7 +1,7 @@
 {
   "name": "lisa_wenke",
   "version": "1.0.0",
-  "main": "router.js",
+  "main": "server.js",
   "directories": {
     "test": "test"
   },
