@@ -11,7 +11,7 @@ module.exports = exports = (req, res, next) => {
       next();
     } catch(e) { //if this does not work send this error with out breaking server
       res.send('invalid JSON');
-      res.end()
+      res.end();
     }
   });
 };

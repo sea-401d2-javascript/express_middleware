@@ -22,7 +22,6 @@ describe('testing functionality of the server', function() {
   });
 });
 
-
 describe('testing middleware JSON parsing function', function() {
 
   it('should give respond with the JSON object', (done) => {
