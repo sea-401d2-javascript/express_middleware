@@ -22,10 +22,7 @@ app.use((req, res, next) => {
 
 app.post('/screams',(req, res) =>{
   if(req.body){
-    var key = Object.keys(req.body)[0];
-    var value = req.body[key];
-    var keyValue = key + ': ' + value;
-    res.write(keyValue);
+    res.json(req.body)
   }
   res.end();
 });
