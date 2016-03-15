@@ -10,6 +10,7 @@
   "author": "Hugo A Guerra <guerrahugoa@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.0",
     "express": "^4.13.4"
   }
 }

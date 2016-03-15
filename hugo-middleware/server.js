@@ -6,7 +6,7 @@ let config = require(__dirname + '/config/env');
 let middleRouter = express.Router();
 require(__dirname + '/routes/route-handle')(middleRouter);
 
-app.use('/api', middleRouter);
+app.use('/', middleRouter);
 app.listen(config.PORT, () => {
-  console.log('listening on port ${config.PORT}');
+  console.log(`listening on port ${config.PORT}`);
 });
