@@ -1,38 +1,41 @@
 'use strict';
 
-let bodyParser = require('body-parser');
-// app.use(bodyParser.json());
-
+let dataArray = [];
 
 module.exports = (middleRouter) => {
   middleRouter.route('/products')
   .get((req, res) => {
     console.log('GET route hit for products');
+    res.write('here would be some products and stuff');
     res.end();
   })
-  .post((err, req, res, next) => {
+  .post((req, res, next) => {
     console.log('POST route hit for products');
-    if (err) {
-      res.status(500).send({error: 'Invalid JSON!!'})
+    // console.log(req);
+    console.log('req body is', req.body);
+    if (req.header('Content-Type') !== 'application/json') {
+      res.status(500).send({error: 'Invalid JSON!! \n'})
       res.end();
     } else {
-    next();
-  };
-  }, (req, res) => {
+      next();
+    };
+}, (req, res) => {
     req.on('data', (data) => {
-      let productPost = req.body;
-      res.json(productPost)
+      dataArray.push(data);
+      console.log('data array is: ',dataArray);
+    });
+    req.on('end', () => {
+      let bufConcat = Buffer.concat(dataArray);
+      req.body = bufConcat.toString();
+      console.log('req body is ', req.body);
+      res.write(bufConcat.toString());
+      console.log('buf to string is ', bufConcat.toString());
       res.end();
     });
   });
   middleRouter.route('/products/:id')
   .get((req, res) => {
     console.log('GET route hit for products/:id');
-  })
-  // .put((req, res) => {
-  //   console.log('PUT route hit for products/:id');
-  // })
-  // .delete((req, res) => {
-  //   console.log('DELETE route hit for products/:id');
-  // })
+    res.end();
+  });
 }
