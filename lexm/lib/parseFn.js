@@ -4,7 +4,6 @@ var parseJsonFn = (req, res, next) => {
   req.on('data', (data) => {
     try {
       var parsedJSON = JSON.parse(data);
-      // debugger;
       req.body = parsedJSON;
       next();
     }
