@@ -9,8 +9,7 @@ app.use('/locations', (req, res, next) => {
       req.body = JSON.parse(data);
     }
     catch(err) {
-      res.status(400)
-      res.test = 400;
+      return res.status(400).json({message: 'invalid json'});
     }
   })
   next();
@@ -20,10 +19,6 @@ app.post('/locations', (req, res, next) => {
   req.on('data', (data, err) => {
     if(err) {throw err}
     let location = req.body;
-    // console.log(res.test);
-    if (res.test === 400) {
-      res.end();
-    }
     res.json({
       status: 200,
       data: location
