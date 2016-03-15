@@ -1,0 +1,33 @@
+{
+  "name": "david-heyduck",
+  "version": "1.0.0",
+  "description": "Express middleware function that parses incoming JSON.",
+  "main": "server.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sea-401d2-javascript/express_middleware.git"
+  },
+  "keywords": [
+    "express",
+    "middleware",
+    "json"
+  ],
+  "author": "David Heyduck <heyduckd@gmail.com> (http://davidheyduck.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sea-401d2-javascript/express_middleware/issues"
+  },
+  "homepage": "https://github.com/sea-401d2-javascript/express_middleware#readme",
+  "devDependencies": {
+    "body-parser": "^1.15.0",
+    "error-handler": "^1.0.0",
+    "express": "^4.13.4"
+  }
+}
