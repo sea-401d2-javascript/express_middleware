@@ -41,7 +41,9 @@ describe('Body Parser Middleware', () => {
         .send('{"name":"alem"}')
         .end((err, res) => {
           if (err) throw err;
-          expect(res.text).to.eql('{"name":"alem"}');
+          expect(res.body).to.have.a.property('name');
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.eql({name:'alem'});
           done();
         });
     });
