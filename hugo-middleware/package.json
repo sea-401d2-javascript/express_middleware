@@ -8,5 +8,8 @@
     "start": "node server.js"
   },
   "author": "Hugo A Guerra <guerrahugoa@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
