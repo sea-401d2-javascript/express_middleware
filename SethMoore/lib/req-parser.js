@@ -5,12 +5,12 @@ function reqParser(req, res, next) {
   req.on('data', (chunk) => {
     body.push(chunk);
   }).on('end', (err) => {
-    if (err) {
-      console.log(err);
-      res.writeHead(400, {'Content-Type': 'text/html'});
-      res.write('invalid json');
-      res.end();
-      return next();
+    if (err) return console.log(err);
+    try {
+      JSON.parse(Buffer.concat(body).toString());
+    } catch (e) {
+      res.status(400).send('invalid json');
+      return res.end();
     }
     req.body = JSON.parse(Buffer.concat(body).toString());
     next();

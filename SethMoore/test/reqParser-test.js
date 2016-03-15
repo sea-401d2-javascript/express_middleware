@@ -32,4 +32,14 @@ describe('testing req-parser.js', () => {
       done();
     });
   });
+  it('should post to "/" a bad json file and get a response saying "invalid json".', (done) => {
+    request('localhost:3000')
+    .post('/')
+    .send('{"name":"bainbridge}')
+    .end((err, res) => {
+      // expect(true).eql(false);
+      expect(res.text).to.eql('invalid json');
+      done();
+    });
+  });
 });
