@@ -15,11 +15,12 @@ describe('parse middleware', () => {
     .send('{"what":"AH!"}')
     .end((err, res) => {
       expect(err).to.eql(null);
+      expect(res).to.have.status(200);
       expect(res.text).to.eql('what: AH!');
       done();
     });
   });
-  it('should respond "invalid json"', (done) => {
+  it('should respond to invalid json with "invalid json"', (done) => {
     request('localhost:3000')
     .post('/screams')
     .send('mk')
