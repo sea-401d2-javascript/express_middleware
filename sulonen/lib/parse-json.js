@@ -1,18 +1,17 @@
 'use strict';
 
 module.exports = function(req, res, next) {
-  var body = [];
+  var body = '';
   req.on('data', (chunk) => {
-    body.push(chunk);
+    body += chunk;
   });
 
-  req.on('end', (err) => {
-    if (err) throw err;
+  req.on('end', () => {
     try {
-      req.body = JSON.parse(Buffer.concat(body).toString());
+      req.body = JSON.parse(body);
+      next();
     } catch (e) {
-      req.body = 'Improper JSON';
+      return res.status(400).json({message: 'Invalid JSON'});  
     }
-    next();
   });
 };

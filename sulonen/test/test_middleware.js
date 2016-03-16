@@ -7,24 +7,21 @@ const request = chai.request;
 const expect = chai.expect;
 
 const express = require('express');
+var app = express();
+
 const parser = require('./../lib/parse-json.js');
+app.use(parser);
 
 describe('Middleware: parse-json', () => {
+
   before(() => {
-    let app = express();
-    let router = express.Router();
-
-    app.use(parser);
-    app.use(router);
-
-    router.route('/')
-      .post((req, res) => {
-        res.send(req.body.toString());
-        res.end();
-      });
+    app.post('/', (req, res) => {
+      res.send(req.body);
+      res.end();
+    });
 
     app.listen(3000, () => {
-      console.log('Server listening on port 3000');
+    // console.log('Server listening on port 3000');
     });
   });
 
@@ -40,10 +37,10 @@ describe('Middleware: parse-json', () => {
         .post('/')
         .send(body)
         .end((err, res) => {
-          if (err) throw err;
-          expect(res.text).to.eql('something');
+          expect(res).to.have.status(200);
+          expect(res.body.name).to.equal('Chester Tester');
+          done();
         });
-      done();
     });
 
     it('should respond with an error on improper JSON', (done) => {
@@ -51,19 +48,10 @@ describe('Middleware: parse-json', () => {
         .post('/')
         .send('XXX')
         .end((err, res) => {
-          if (err) console.log(err.status);
-          //expect(err.text).to.include('JSON');
+          expect(res).to.have.status(400);
+          expect(res.body.message).to.equal('Invalid JSON');
           done();
         });
     });
   });
-
-  describe('Unit tests', () => {
-
-    it('should return a JSON object', (done) => {
-
-      done();
-    });
-  });
-
 });
