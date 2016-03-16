@@ -24,8 +24,6 @@
     "gulp-mocha": "^2.2.0"
   },
   "dependencies": {
-    "body-parser": "^1.15.0",
-    "concat-stream": "^1.5.1",
     "express": "^4.13.4"
   }
 }
