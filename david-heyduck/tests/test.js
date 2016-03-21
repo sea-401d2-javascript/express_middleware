@@ -8,13 +8,14 @@ var expect = chai.expect;
 require(__dirname + '/../server');
 
 describe('middleware integration tests', () => {
-  it('should test valid json', (done) => {
+  it('should test valid json', () => {
     request('localhost:3000')
-    .post('/')
+    .post('/test')
     .send({message:'test'})
     .end((err, res) => {
-      expect(JSON.parse(res.body)).to.be.an('object');
-      expect(JSON.parse(res.body)).to.eql({"message":"test"});
+      expect(JSON.parse(res.body)).should.be.a('object');
+      expect(JSON.parse(res.body)).should.have.property('message')
+      expect(JSON.parse(res.body)).to.eql("test");
       done();
     });
   });

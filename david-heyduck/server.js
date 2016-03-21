@@ -1,11 +1,11 @@
 'use strict';
 
-let express = require('express');
-let app = express();
-let users = express.Router();
+var express = require('express');
+var app = express();
+var users = express.Router();
 
 var Parser = function(req, res, next){
-  req.on('data', (data) => {
+  req.on('data', function(data) {
     req.body = data.toString()
     try {
       JSON.parse(req.body)
@@ -13,7 +13,7 @@ var Parser = function(req, res, next){
       console.log('invalid JSON');
     }
   })
-  req.on('end', () => {
+  req.on('end', function(){
     next()
   })
 }
@@ -25,6 +25,6 @@ app.post('/', function(req, res){
     res.end()
 })
 
-app.listen(3000, () => {
+app.listen(3000, function() {
   console.log('Listening on port 3000');
 })
