@@ -1,51 +1,28 @@
 'use strict';
 
 let express = require('express');
-let bodyParser = require('body-parser');
-// let errorHandler = require('error-handler');
-
 let app = express();
 let users = express.Router();
 
-let database = {
-  users: [
-    {
-      name: 'David',
-      age: 24,
-      gender: 'Male'
-    },
-    {
-      name: 'Marz',
-      age: 23,
-      gender: 'Female'
+var Parser = function(req, res, next){
+  req.on('data', (data) => {
+    req.body = data.toString()
+    try {
+      JSON.parse(req.body)
+    } catch (err) {
+      console.log('invalid JSON');
     }
-  ]
+  })
+  req.on('end', () => {
+    next()
+  })
 }
 
-app.use(bodyParser.json());
+app.use(Parser);
 
-app.use((req, res, next) => {
-  console.log('A request has been made');
-  next()
-})
-
-app.get('/', (req, res) => {
-  res.json({
-    status: true,
-    data: database.shoes
-  })
-})
-
-app.post('/', (req, res) => {
-  try {
-    database.users.push(req.body)
-    let user = req.body
-    res.json({
-      status: true,
-      data: user
-    })
-  }
-  catch console.log('Invalid JSON');
+app.post('/', function(req, res){
+    res.json(req.body)
+    res.end()
 })
 
 app.listen(3000, () => {
